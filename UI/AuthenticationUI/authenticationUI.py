@@ -55,15 +55,18 @@ class Ui_MainWindow(object):
         self.login_label.setStyleSheet(root.find('line_edit_style/value').text)
         self.password_label.setStyleSheet(root.find('line_edit_style/value').text)
         self.pushButton.setStyleSheet(root.find('QPushButton_style/value').text)
-
+        self.loginFunction()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def loginFunction(self):
+        self.pushButton.clicked.connect(lambda: check_credentials(self.login_label.text(),
+                                                                  self.password_label.text()))
 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Вхід"))
         self.pushButton.setText(_translate("MainWindow", "Увійти"))
         self.label.setText(_translate("MainWindow", "Логін:"))
         self.label_2.setText(_translate("MainWindow", "Пароль:"))
@@ -72,7 +75,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
 
-    print(check_credentials("user1","password1"))
+    #print(check_credentials("user1","password1"))
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()

@@ -26,8 +26,9 @@ def check_credentials(username, password):
         cursor.close()
         db_connection.close()
 
-
+        print(bool(result))
         return bool(result)
+
 
     except Exception as e:
         print(f"Error: {e}")
