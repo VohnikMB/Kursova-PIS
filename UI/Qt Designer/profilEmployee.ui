@@ -36,7 +36,7 @@
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>H:/ikni/Git/Kursova-PIS/Shared/ICO/Default_Profile_Picture.png</pixmap>
+     <pixmap>../../Shared/ICO/Default_Profile_Picture.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
