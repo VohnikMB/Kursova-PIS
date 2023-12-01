@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        self.loginFunction()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -82,7 +82,9 @@ class Ui_MainWindow(object):
         self.staffList.setText(_translate("MainWindow", "Штатний розпис і витяг"))
         self.reqSpecification.setText(_translate("MainWindow", "Отримата характеристику"))
 
-
+    def loginFunction(self):
+        self.pushButton.clicked.connect(lambda: check_credentials(self.login_label.text(),
+                                                                  self.password_label.text()))
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

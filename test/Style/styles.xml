@@ -1,0 +1,10 @@
+<styles>
+    <line_edit_style>
+        <value>border: 2px solid #4CAF50; border-radius: 10px; padding: 2px;</value>
+    </line_edit_style>
+    <QPushButton_style>
+        <value>background-color: #4CAF50; color: white; border: none; padding: 10px 20px;
+                text-align: center; text-decoration: none; display: inline-block; font-size: 25px;
+                margin: 4px 2px; cursor: pointer; border-radius: 8px;</value>
+    </QPushButton_style>
+</styles>
