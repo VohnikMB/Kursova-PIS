@@ -1,6 +1,5 @@
 # Default ignored files
 /.idea
 /__pycache__
-/main.py
 BLL/Authentication/__pycache__
 *.pyc
