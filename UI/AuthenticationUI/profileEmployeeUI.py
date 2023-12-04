@@ -1,13 +1,11 @@
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QPushButton
 from PyQt5.QtGui import QPixmap, QFont
 from BLL.Authorization.job_instruktion import jobInstructions_box
 from PyQt5 import QtCore
-from PyQt5 import *
-import pdb
-import os
-import xml.etree.ElementTree as ET
 
-from functools import partial
+import os
+
+import xml.etree.ElementTree as ET
 
 
 class ProfileWindow(QMainWindow):
@@ -18,6 +16,11 @@ class ProfileWindow(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
+        current_directory = os.path.dirname(__file__)
+        xml_file_path = os.path.join(current_directory, '..', 'Style', 'styles.xml')
+        tree = ET.parse(xml_file_path)
+        root = tree.getroot()
+
         self.setWindowTitle('Профіль користувача')
         self.setGeometry(0, 0, 1366, 768)
         self.centralwidget = QWidget()
@@ -65,13 +68,21 @@ class ProfileWindow(QMainWindow):
         self.vacationSchedule = QPushButton(self.centralwidget)
         self.vacationSchedule.setGeometry(440, 170, 371, 71)
         self.vacationSchedule.setObjectName("vacationSchedule")
+
         self.staffList = QPushButton(self.centralwidget)
         self.staffList.setGeometry(440, 280, 371, 71)
-
         self.staffList.setObjectName("staffList")
+
         self.reqSpecification = QPushButton(self.centralwidget)
         self.reqSpecification.setGeometry(440, 390, 371, 71)
         self.reqSpecification.setObjectName("reqSpecification")
+
+        if self.work_SQL_inf in ["Головний_бухгалтер", "Бухгалтер"]:
+            self.taxReporting = QPushButton(self.centralwidget)
+            self.taxReporting.setGeometry(440, 500, 371, 71)
+            self.taxReporting.setObjectName("taxReporting")
+            self.taxReporting.setText("Податкова форма")
+            self.taxReporting.setStyleSheet(root.find('QPushButton_style/value').text)
 
         self.work.setText(self.work_SQL_inf)
         self.name.setText(self.user_name)
@@ -80,18 +91,15 @@ class ProfileWindow(QMainWindow):
         self.staffList.setText("Штатний розпис і витяг")
         self.reqSpecification.setText("Отримати характеристику")
 
-        current_directory = os.path.dirname(__file__)
-        xml_file_path = os.path.join(current_directory, '..', 'Style', 'styles.xml')
-        tree = ET.parse(xml_file_path)
-        root = tree.getroot()
-
         self.jobInstructions.setStyleSheet(root.find('QPushButton_style/value').text)
         self.vacationSchedule.setStyleSheet(root.find('QPushButton_style/value').text)
         self.staffList.setStyleSheet(root.find('QPushButton_style/value').text)
         self.reqSpecification.setStyleSheet(root.find('QPushButton_style/value').text)
-        self.jobInstructions.clicked.connect(lambda: jobInstructions_box(self.work_SQL_inf))
 
+        self.jobInstructions.clicked.connect(lambda: jobInstructions_box(self.work_SQL_inf))
         self.show()
 
+        self.exit.mousePressEvent = self.exit_clicked
 
-
+    def exit_clicked(self, event):
+        self.close()

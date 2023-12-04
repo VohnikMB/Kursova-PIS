@@ -18,13 +18,11 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
             user_name, work_inf = profileSQL(self.login_label.text(), self.password_label.text())
             self.profile_window = ProfileWindow(user_name, work_inf)
             self.profile_window.show()
-            self.close()
-
+            self.login_label.clear()
+            self.password_label.clear()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-
     login_window = LoginWindow()
     login_window.show()
-
-    sys.exit(app.exec_())
+    app.exec_()
