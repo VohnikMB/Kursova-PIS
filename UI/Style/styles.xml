@@ -7,4 +7,10 @@
                 text-align: center; text-decoration: none; display: inline-block; font-size: 25px;
                 margin: 4px 2px; cursor: pointer; border-radius: 8px;</value>
     </QPushButton_style>
+
+    <QPushButton_Profile_style>
+        <value>background-color: white; color: #4CAF50; border: 2px solid #4CAF50; border-radius: 10px; padding: 10px 20px;
+                text-align: center; text-decoration: none; display: inline-block; font-size: 25px;
+                margin: 4px 2px; cursor: pointer; border-radius: 8px;</value>
+    </QPushButton_Profile_style>
 </styles>
