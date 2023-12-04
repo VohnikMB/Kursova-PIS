@@ -1,9 +1,14 @@
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QVBoxLayout, QPushButton, QMessageBox
 from PyQt5.QtGui import QPixmap, QFont
+from BLL.Authorization.job_instruktion import jobInstructions_box
 from PyQt5 import QtCore
+from PyQt5 import *
 import pdb
 import os
 import xml.etree.ElementTree as ET
+
+from functools import partial
+
 
 class ProfileWindow(QMainWindow):
     def __init__(self, user_name, work_SQL_inf):
@@ -15,17 +20,13 @@ class ProfileWindow(QMainWindow):
     def init_ui(self):
         self.setWindowTitle('Профіль користувача')
         self.setGeometry(0, 0, 1366, 768)
-
         self.centralwidget = QWidget()
         self.setCentralWidget(self.centralwidget)
-
         self.ico = QLabel(self.centralwidget)
+
         self.ico.setGeometry(1250, 0, 111, 111)
         self.ico.setMaximumSize(122, 125)
-
-        # Використовуйте повний шлях до файлу зображення або переконайтеся, що він у тому ж каталозі, що й ваш скрипт
         image_path = os.path.abspath('Shared/ICO/Default_Profile_Picture.png')
-
         pixmap = QPixmap(image_path)
         self.ico.setPixmap(pixmap)
         self.ico.setScaledContents(True)
@@ -38,7 +39,6 @@ class ProfileWindow(QMainWindow):
         self.name.setScaledContents(False)
         self.name.setAlignment(QtCore.Qt.AlignCenter)
         self.name.setObjectName("name")
-
 
         self.exit = QLabel(self.centralwidget)
         self.exit.setGeometry(1240, 180, 131, 20)
@@ -57,7 +57,6 @@ class ProfileWindow(QMainWindow):
         self.work.setScaledContents(False)
         self.work.setAlignment(QtCore.Qt.AlignCenter)
         self.work.setObjectName("work")
-
 
         self.jobInstructions = QPushButton(self.centralwidget)
         self.jobInstructions.setGeometry(440, 60, 371, 71)
@@ -90,6 +89,9 @@ class ProfileWindow(QMainWindow):
         self.vacationSchedule.setStyleSheet(root.find('QPushButton_style/value').text)
         self.staffList.setStyleSheet(root.find('QPushButton_style/value').text)
         self.reqSpecification.setStyleSheet(root.find('QPushButton_style/value').text)
-
+        self.jobInstructions.clicked.connect(lambda: jobInstructions_box(self.work_SQL_inf))
 
         self.show()
+
+
+

@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         xml_file_path = os.path.join(current_directory, '..', 'Style', 'styles.xml')
         tree = ET.parse(xml_file_path)
         root = tree.getroot()
-
+        self.password_label.setEchoMode(QLineEdit.Password)
         self.login_label.setStyleSheet(root.find('line_edit_style/value').text)
         self.password_label.setStyleSheet(root.find('line_edit_style/value').text)
         self.pushButton.setStyleSheet(root.find('QPushButton_style/value').text)
