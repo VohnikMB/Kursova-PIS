@@ -15,8 +15,9 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
 
     def login_function(self):
         if check_credentials(self.login_label.text(), self.password_label.text()):
-            user_name, work_inf = profileSQL(self.login_label.text(), self.password_label.text())
-            self.profile_window = ProfileWindow(user_name, work_inf)
+
+            user_name, work_inf, full_work = profileSQL(self.login_label.text(), self.password_label.text())
+            self.profile_window = ProfileWindow(user_name, work_inf, full_work)
             self.profile_window.show()
             self.login_label.clear()
             self.password_label.clear()

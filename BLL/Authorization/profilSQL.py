@@ -13,7 +13,7 @@ def get_employee_info(username, password):
         cursor = db_connection.cursor()
 
         sql_query = f"""
-            SELECT workers.name, profession_table.profession
+            SELECT workers.name, workers.position_code, workers.full_title_position
             FROM users
             JOIN workers ON users.id = workers.ID
             JOIN profession_table ON workers.position_code = profession_table.position_code
