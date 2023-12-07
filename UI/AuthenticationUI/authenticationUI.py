@@ -59,6 +59,7 @@ class Ui_MainWindow(object):
         self.pushButton.setStyleSheet(root.find('QPushButton_style/value').text)
         self.loginFunction()
         self.retranslateUi(MainWindow)
+        self.setTabOrder(self.login_label, self.password_label)
 
     def retranslateUi(self, MainWindow):
         _translate = QApplication.translate

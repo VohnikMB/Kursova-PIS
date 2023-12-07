@@ -8,8 +8,9 @@ import xml.etree.ElementTree as ET
 
 
 class ProfileWindow(QMainWindow):
-    def __init__(self, user_name, work_SQL_inf, full_work):
+    def __init__(self, user_name, work_SQL_inf, full_work, password):
         super().__init__()
+        self.password = password
         self.full_work = full_work
         self.work_SQL_inf = work_SQL_inf
         self.user_name = user_name
@@ -83,14 +84,14 @@ class ProfileWindow(QMainWindow):
             self.taxReporting.setGeometry(440, 480, 371, 71)
             self.taxReporting.setObjectName("taxReporting")
             self.taxReporting.setText("Податкова форма")
-            self.taxReporting.setStyleSheet(root.find('QPushButton_style/value').text)
+            self.taxReporting.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
         if self.work_SQL_inf == 3:
             self.registrButton = QPushButton(self.centralwidget)
             self.registrButton.setGeometry(440, 480, 371, 71)
             self.registrButton.setObjectName("taxReporting")
             self.registrButton.setText("Зареєструвати працівника")
             self.registrButton.setStyleSheet(root.find('QPushButton_style/value').text)
-            self.registrWindow = RegistrationWindow()
+            self.registrWindow = RegistrationWindow(self.password)
             self.registrWindow.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # Зроблено вікно завжди зверху
             self.registrButton.clicked.connect(self.registrWindow.show)
         self.work.setText(self.full_work)
@@ -101,9 +102,9 @@ class ProfileWindow(QMainWindow):
         self.reqSpecification.setText("Отримати характеристику")
 
         self.jobInstructions.setStyleSheet(root.find('QPushButton_style/value').text)
-        self.vacationSchedule.setStyleSheet(root.find('QPushButton_style/value').text)
-        self.staffList.setStyleSheet(root.find('QPushButton_style/value').text)
-        self.reqSpecification.setStyleSheet(root.find('QPushButton_style/value').text)
+        self.vacationSchedule.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
+        self.staffList.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
+        self.reqSpecification.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
         self.jobInstructions.clicked.connect(lambda: jobInstructions_box(self.work_SQL_inf))
         self.show()
 

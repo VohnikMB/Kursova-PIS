@@ -1,4 +1,3 @@
-# main.py
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from UI.AuthenticationUI.authenticationUI import Ui_MainWindow
@@ -17,7 +16,7 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
         if check_credentials(self.login_label.text(), self.password_label.text()):
 
             user_name, work_inf, full_work = profileSQL(self.login_label.text(), self.password_label.text())
-            self.profile_window = ProfileWindow(user_name, work_inf, full_work)
+            self.profile_window = ProfileWindow(user_name, work_inf, full_work, self.password_label.text())
             self.profile_window.show()
             self.login_label.clear()
             self.password_label.clear()

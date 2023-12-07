@@ -24,12 +24,3 @@ def check_credentials(username, password):
         print(f"Error: {e}")
         return False
 
-def validate_password(password):
-    # Регулярний вираз для перевірки пароля
-    pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
-
-    # Перевірка за допомогою регулярного виразу
-    if re.match(pattern, password):
-        return True
-    else:
-        return False
