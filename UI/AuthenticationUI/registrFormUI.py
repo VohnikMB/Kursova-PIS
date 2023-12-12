@@ -152,6 +152,9 @@ class RegistrationWindow(QMainWindow):
         self.setTabOrder(self.lineIPP, self.line_full_title_position)
         self.setTabOrder(self.line_full_title_position, self.line_HR_Password)
 
+        self.lineIPP.editingFinished.connect(self.check_info)
+        self.line_HR_Password.editingFinished.connect(self.check_info)
+        self.line_full_title_position.editingFinished.connect(self.check_info)
         self.lineLogin.editingFinished.connect(self.check_info)
         self.linePassword.editingFinished.connect(self.check_info)
         self.show()
@@ -206,5 +209,5 @@ class RegistrationWindow(QMainWindow):
 
     @staticmethod
     def get_button_object_name(button):
-        print(button.objectName())
+        #print(button.objectName())
         return button.objectName()

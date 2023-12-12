@@ -4,6 +4,7 @@ from BLL.Authorization.job_instruktion import jobInstructions_box
 from PyQt5 import QtCore
 import os
 from UI.AuthenticationUI.registrFormUI import RegistrationWindow
+from UI.AuthenticationUI.vacation import Ui_Vacation
 import xml.etree.ElementTree as ET
 
 
@@ -97,14 +98,19 @@ class ProfileWindow(QMainWindow):
         self.work.setText(self.full_work)
         self.name.setText(self.user_name)
         self.jobInstructions.setText("Посадові інструкції")
-        self.vacationSchedule.setText("Графік відпусток")
+        self.vacationSchedule.setText("Заява на відпустку")
         self.staffList.setText("Штатний розпис і витяг")
         self.reqSpecification.setText("Отримати характеристику")
 
         self.jobInstructions.setStyleSheet(root.find('QPushButton_style/value').text)
-        self.vacationSchedule.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
+        self.vacationSchedule.setStyleSheet(root.find('QPushButton_style/value').text)
         self.staffList.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
         self.reqSpecification.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
+
+        self.vacationForm = Ui_Vacation(self.user_name,self.full_work)
+        self.vacationForm.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.vacationSchedule.clicked.connect(self.vacationForm.show)
+
         self.jobInstructions.clicked.connect(lambda: jobInstructions_box(self.work_SQL_inf))
         self.show()
 
