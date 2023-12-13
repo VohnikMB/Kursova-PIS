@@ -4,6 +4,7 @@ from BLL.Authorization.job_instruktion import jobInstructions_box
 from PyQt5 import QtCore
 import os
 from UI.AuthenticationUI.registrFormUI import RegistrationWindow
+from UI.AuthenticationUI.podForm import Ui_Frame
 from UI.AuthenticationUI.vacation import Ui_Vacation
 import xml.etree.ElementTree as ET
 
@@ -85,7 +86,11 @@ class ProfileWindow(QMainWindow):
             self.taxReporting.setGeometry(440, 480, 371, 71)
             self.taxReporting.setObjectName("taxReporting")
             self.taxReporting.setText("Податкова форма")
-            self.taxReporting.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
+            self.taxReporting.setStyleSheet(root.find('QPushButton_style/value').text)
+            self.taxReportingUI = Ui_Frame(self.user_name)
+            self.taxReportingUI.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+            self.taxReporting.clicked.connect(self.taxReportingUI.show)
+
         if self.work_SQL_inf == 3:
             self.registrButton = QPushButton(self.centralwidget)
             self.registrButton.setGeometry(440, 480, 371, 71)
@@ -107,7 +112,7 @@ class ProfileWindow(QMainWindow):
         self.staffList.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
         self.reqSpecification.setStyleSheet(root.find('QPushButton_styleNOTWORK/value').text)
 
-        self.vacationForm = Ui_Vacation(self.user_name,self.full_work)
+        self.vacationForm = Ui_Vacation(self.user_name, self.full_work)
         self.vacationForm.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.vacationSchedule.clicked.connect(self.vacationForm.show)
 
